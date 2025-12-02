@@ -3,7 +3,7 @@
 {
 # Install firefox.
   programs.firefox.enable = true;
-
+  programs.fish.enable = true;
 
 
 
@@ -11,6 +11,8 @@
     vim
     wget
     git
+    vscode
+    nix-output-monitor
  ];
 
 
