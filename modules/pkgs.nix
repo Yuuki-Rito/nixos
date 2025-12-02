@@ -12,6 +12,10 @@
     wget
     git
     vscode
+    # libtiff
+    numlockx
+    wpsoffice
+    # clash-verge-rev
     nix-output-monitor
  ];
 

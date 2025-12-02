@@ -12,15 +12,26 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/a3ab3a38-8f79-423b-b086-21c37d92b3b1";
+    { device = "/dev/disk/by-uuid/68b9ad75-11ae-4009-99eb-4995ff99388c";
       fsType = "ext4";
     };
 
   fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/229C-333E";
+    { device = "/dev/disk/by-uuid/FEBD-7869";
       fsType = "vfat";
 #       options = [ "fmask=0077" "dmask=0077" ];
     };
+
+  fileSystems."/mnt/hgfs" = {
+    device = ".host:/";
+    fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
+    options = [
+      "allow_other"
+      "umask=027"  # 等价于权限750（umask=027 → 777-027=750）
+      "uid=1000"    # 指定属主UID（替换为你的用户UID，可用id -u查看）
+      "gid=100"     # 指定属组GID（替换为你的组GID，可用id -g查看）
+    ];
+  };
 
   swapDevices = [ ];
 
