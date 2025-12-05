@@ -1,0 +1,157 @@
+// Modified from: 24.jsonc
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+   "logo": {
+   "type": "file",
+    "source": "~/.config/fastfetch/logo.txt", // 新版用source
+    "color": {
+       "1": "italic_#FF69B4"  // 第2行颜色
+    }
+   },
+    "display": {
+      "separator": "",
+      "constants": [
+        // CONSTANT {$1} - VERTICAL BARS AT START AND 75th CHARACTERS FORWARD AND BACKWARD
+        "\u001b[90m│                                                            │\u001b[60D\u001b[39m"
+      ]
+    },
+    "modules": [
+      // CUSTOM - Top UI bar
+      {
+        "type": "custom",
+        "key": "{#90}╭ Keys ───────╮",
+        "format": "{#90}╭ Values ────────────────────────────────────────────────────╮",
+      },
+
+
+
+      {
+        "type": "host",
+        "key": "{#90}│ {#93} PC        {#90}│",
+        "format": "{$1}{name}"
+      },
+      {
+        "type": "os",
+        "key": "{#90}│ {#93} OS        {#90}│",
+        "format": "{$1}{?pretty-name}{pretty-name}{?}{/pretty-name}{name}{/} {codename}  {#2}[v{version}] [{arch}]"
+      },
+      {
+        "type": "kernel",
+        "key": "{#90}│ {#93} Kernel    {#90}│",
+        "format": "{$1}{sysname}  {#2}[v{release}]"
+      },
+      {
+        "type": "uptime",
+        "key": "{#90}│ {#93} Uptime    {#90}│",
+        "format": "{$1}{?days}{days} Days + {?}{hours} hours, {minutes} mins"
+      },
+      {
+        "type": "packages",
+        "key": "{#90}│ {#93}󰏖 Pkgs      {#90}│",
+        "format": "{$1}{?pacman}{pacman} (pacman) [{pacman-branch}]  {?nix-system}{nix-system} (nix)  {?nix-user}{nix-user} (nix-user)"
+      },
+      {
+        "type": "display",
+        "key": "{#90}│ {#92}󰍹 Display   {#90}│",
+        "format": "{$1}{width}x{height} in {inch}\", {refresh-rate}Hz [{type}]  "
+      },
+       {
+        "type": "wm",
+        "key": "{#90}│ {#92} WM        {#90}│",
+        "format": "{$1}{process-name} ({protocol-name})"
+      },
+       {
+        "type": "theme",
+        "key": "{#90}│ {#92}󰉼 Theme     {#90}│",
+        "format": "{$1}{theme1}{theme2}"
+      },
+      {
+        "type": "icons",
+        "key": "{#90}│ {#92}󰀻 Icons     {#90}│",
+        "format": "{$1}{icons1}{icons2}"
+      },
+      {
+        "type": "cursor",
+        "key": "{#90}│ {#92}󰆿 Cursor    {#90}│",
+        "format": "{$1}{theme} ({size})"
+      },
+      {
+        "type": "cpu",
+        "key": "{#90}│ {#91} CPU       {#90}│",
+        "showPeCoreCount": true,
+        "temp": true,
+        "format": "{$1}{name}  {#2}[C:{core-types}] [{freq-max}]"
+      },
+      {
+        "type": "gpu",
+        "key": "{#90}│ {#91} GPU       {#90}│",
+        "detectionMethod": "auto",
+        "driverSpecific": true,
+        "format": "{$1}{name}  {#2}[C:{core-count}]{?frequency} [{frequency}]{?} {#2}[{type}]"
+      },
+      {
+        "type": "memory",
+        "key": "{#90}│ {#91} RAM       {#90}│",
+        "format": "{$1}{used} / {total} ({percentage})"
+      },
+      {
+        "type": "disk",
+        "key": "{#90}│ {#91} Disk      {#90}│",
+        "format": "{$1}{size-used} / {size-total} ({size-percentage})"
+      },
+      {
+        "type": "terminal",
+        "key": "{#90}│ {#94} Terminal  {#90}│",
+        "format": "{$1}{pretty-name}  {#2}[{version}] [PID:{pid}]"
+      },
+      {
+        "type": "terminalfont",
+        "key": "{#90}│ {#94} Font      {#90}│",
+        "format": "{$1}{name}  {#2}[{size}]"
+      },
+      {
+        "type": "shell",
+        "key": "{#90}│ {#94} Shell     {#90}│",
+        "format": "{$1}{pretty-name}  {#2}[v{version}] [PID:{pid}]"
+      },
+      {
+        // localip IPv4
+        "type": "localip",
+        "key": "{#90}│ {#94}󰩟 Local IP  {#90}│",
+        "showPrefixLen": true,
+        "showIpv4": true,
+        "showIpv6": false,
+        "showMtu": true,
+        "format": "{$1}{ifname}: {ipv4}  {#2}[MTU:{mtu}]"
+      },
+    
+      {
+        "type": "publicip",
+        "key": "{#90}│ {#94}󰩠 Public IP {#90}│",
+        "ipv6": false,
+        "format": "{$1}{ip}  {#2}[{location}]"
+      },
+   
+      // CUSTOM - Button UI bar
+      {
+        "type": "custom",
+        "key": "{#90}╰─────────────╯",
+        "format": "{#90}╰────────────────────────────────────────────────────────────╯",
+      },
+      "break",
+      {
+        "type": "custom",
+        "key": " ",
+        "format": "{#90}╭ Colors ───────────────────────────────────────────────────────────────────╮",
+      },
+      {
+            "type": "colors",
+            "paddingLeft": 3,
+            "symbol": "circle"
+        },
+      {
+        "type": "custom",
+        "format": "{#90}╰───────────────────────────────────────────────────────────────────────────╯",
+      },
+    ]
+  }
