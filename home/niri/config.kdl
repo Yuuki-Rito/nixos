@@ -380,8 +380,8 @@ window-rule {
     // match app-id="jetbrains-idea"
     match app-id="Code"
 
-    open-maximized true
-    //open-maximized-to-edges false
+    // open-maximized true
+    open-maximized-to-edges true
 }
 
 

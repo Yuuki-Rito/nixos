@@ -22,8 +22,8 @@
 #       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  fileSystems."/mnt/hgfs" = {
-    device = ".host:/";
+  fileSystems."/mnt" = {
+    device = ".host:";
     fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
     options = [
       "allow_other"
