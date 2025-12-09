@@ -19,6 +19,7 @@
   # 中文字体优化
   fonts = {
   packages = with pkgs; [
+    corefonts              # 微软核心字体 
     cascadia-code
     fira-code
     noto-fonts
