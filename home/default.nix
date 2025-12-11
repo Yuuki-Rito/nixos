@@ -5,7 +5,7 @@
     ".config/fastfetch".source = ./fastfetch;
     ".config/smplayer".source = ./smplayer;
     
-  }
+  };
 
 
   imports = [

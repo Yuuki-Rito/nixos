@@ -1,27 +1,17 @@
-{ config, pkgs, ... }:
+{ config, pkgs,wpsMuiSource, ... }:
   let
-    # wpsFontsOverlay = import ./overlays/wps-fonts-overlay.nix;
-   
-    oldPkgs = import (builtins.fetchGit {
-      name = "my-old-revision";
-      url = "https://github.com/NixOS/nixpkgs/";
-      ref = "refs/heads/nixos-25.11";
-      rev = "8f77e1654b14692e01112fe487df04fa8da9d593";
-    }) {};
+    # clash-verge-rev 2.3.1
+    oldPkgsC = import (builtins.fetchTarball {
+      url = "https://github.com/NixOS/nixpkgs/archive/8f77e1654b14692e01112fe487df04fa8da9d593.tar.gz";
+      sha256 = "0jipix4b2fiy1da5hgmzhvrr5bh9zzdd9fs1a853qhjcljn32wyp";
+    }) {
+      system = "x86_64-linux"; 
+    };
     
-    myClashVerge = oldPkgs.clash-verge-rev;
+    myClashVerge = oldPkgsC.clash-verge-rev;
 
-    oldPkgs = import (builtins.fetchGit {
-      # Descriptive name to make the store path easier to identify
-      name = "my-old-revision";
-      url = "https://github.com/NixOS/nixpkgs/";
-      ref = "refs/heads/nixpkgs-25.11";
-      rev = "c8e344196154514112c938f2814e809b1ca82da1";
-     }) {};
-
-     myTypora = oldPkgs.typora;
-
-    
+    # nix-hash --type sha256 --to-base32 <(curl -L https://github.com/NixOS/nixpkgs/archive/8f77e1654b14692e01112fe487df04fa8da9d593.tar.gz)
+    # nix-prefetch-url --unpack https://github.com/NixOS/nixpkgs/archive/8f77e1654b14692e01112fe487df04fa8da9d593.tar.gz
     
   in
 {
@@ -29,7 +19,9 @@
   programs.firefox.enable = true;
 
   nixpkgs.overlays = [
-    wpsFontsOverlay
+    # 配置 overlays 以集成 WPS 中文语言包 
+    # (import ../../overlays/wpsoffice { inherit wpsMuiSource; })
+    (import ../../overlays/typora)
   ];
 
   environment.systemPackages = with pkgs; [
@@ -42,9 +34,9 @@
     smplayer
     steam
     vscode
-    # libtiff
-    # clash-verge-rev
+    wpsoffice
     myClashVerge
+    typora
  ];
 
 

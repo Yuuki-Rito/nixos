@@ -5,8 +5,6 @@
   ];
   # install package
   environment.systemPackages = with pkgs; [
-    cava
-    quickshell
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     # ... maybe other stuff
   ];
