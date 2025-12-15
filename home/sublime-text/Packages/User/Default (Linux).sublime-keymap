@@ -1,0 +1,44 @@
+[
+    // 关闭所有窗口
+    { "keys": ["ctrl+shift+f4"], "command": "close_all" },  
+    // 增加一行
+    { "keys": ["ctrl+alt+j"], "command": "join_lines" },  
+    //跳转到上一个编辑地方
+    { "keys": ["alt+left"], "command": "jump_back" },
+    // 跳转到下一个编辑地方
+    { "keys": ["alt+right"], "command": "jump_forward" },
+    //整行下移
+    { "keys": ["alt+down"], "command": "swap_line_down" },
+    //整行上移
+    { "keys": ["alt+up"], "command": "swap_line_up" },
+    //自动提示
+    { "keys": ["alt+/"], "command": "auto_complete" },
+    // 转换大写
+    { "keys": ["ctrl+shift+x"], "command": "upper_case" },
+    // 转换小写
+    { "keys": ["ctrl+shift+y"], "command": "lower_case" },
+    // 删除整行
+    { "keys": ["ctrl+d"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete Line.sublime-macro"} },
+    // 光标移动到指定行
+    { "keys": ["ctrl+l"], "command": "show_overlay", "args": {"overlay": "goto", "text": ":"} },
+    // 快速定位到选中的文字
+    { "keys": ["ctrl+k"], "command": "find_under_expand_skip" },
+    // 这个命令默认使用的是ctrl+shift+P
+    { "keys": ["ctrl+shift+p"], "command": "show_overlay", "args": {"overlay": "command_palette"} },
+    // outline
+    { "keys": ["ctrl+o"], "command": "show_overlay", "args": {"overlay": "goto", "text": "@"} },
+    // 当前文件中的关键字(方便快速查找内容)
+    { "keys": ["ctrl+alt+o"], "command": "show_overlay", "args": {"overlay": "goto", "text": "#"} },
+    // open resource
+    { "keys": ["ctrl+shift+r"], "command": "show_overlay", "args": {"overlay": "goto", "show_files": true} },
+    // 文件内查找/替换
+    { "keys": ["ctrl+f"], "command": "show_panel", "args": {"panel": "replace"} },
+    // 全局查找/替换, 在查询结果中双击跳转到匹配位置
+    {"keys": ["ctrl+h"], "command": "show_panel", "args": {"panel": "find_in_files"} },
+    //跳转到定义，比如在某个函数上按此键，则跳转到它的定义
+    { "keys": ["ctrl+up"], "command": "goto_definition" },
+    // plugin配置
+    { "keys": ["alt+a"], "command": "alignment" },
+    // 这里使用的是html+css+js prettify插件来格式化
+    { "keys": ["ctrl+shift+f"], "command": "htmlprettify" }
+]
