@@ -11,24 +11,21 @@
     ];
 
 
-  # wmware
-  # 启用 HGFS 文件共享服务
-  virtualisation.vmware.guest.enable = true;
-#   virtualisation.vmware.guest.enableSharedFolders = true;
 
   # Bootloader.
-#   boot.loader.systemd-boot.enable = true;
-#   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.loader = {
-    grub.enable = true;
-    grub.efiSupport = true;
-    grub.useOSProber = true;
-    grub.device = "nodev";
-    efi.canTouchEfiVariables = true;
-    efi.efiSysMountPoint = "/boot/efi";
-
-  };
+#   boot.loader = {
+#     grub.enable = true;
+#     grub.efiSupport = true;
+#     grub.useOSProber = true;
+#     grub.fsIdentifier = "UUID";
+#     grub.device = "nodev";
+#     efi.canTouchEfiVariables = false;
+#     efi.efiSysMountPoint = "/boot/efi";
+#
+#   };
 
   # 设置系统的中文环境
   i18n = {
@@ -135,6 +132,10 @@
       "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store?priority=5"
       "https://cache.nixos.org/"
     ];
+      
+    extra-substituters = [ "https://vicinae.cachix.org" ];
+    extra-trusted-public-keys = [ "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc=" ];
+
     # 增加下载缓冲区大小
 #     download-buffer-size = 524288000;
   };
@@ -167,6 +168,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.11"; # Did you read the comment?
 
 }

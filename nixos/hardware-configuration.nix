@@ -4,43 +4,64 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports = [ ];
+  imports =
+    [ (modulesPath + "/installer/scan/not-detected.nix")
+    ];
 
-  boot.initrd.availableKernelModules = [ "ata_piix" "mptspi" "uhci_hcd" "ehci_pci" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "uas" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" "ntfs3" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/68b9ad75-11ae-4009-99eb-4995ff99388c";
-      fsType = "ext4";
+    { device = "/dev/disk/by-uuid/d69ca3ec-c4a4-42aa-9bb0-a48e67599fde";
+      fsType = "btrfs";
+      options = [ "subvol=root"  "compress=zstd"  "noatime"];
     };
 
-  fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/FEBD-7869";
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/d69ca3ec-c4a4-42aa-9bb0-a48e67599fde";
+      fsType = "btrfs";
+      options = [ "subvol=home" "compress=zstd"  "noatime" ];
+    };
+
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/d69ca3ec-c4a4-42aa-9bb0-a48e67599fde";
+      fsType = "btrfs";
+      options = [ "subvol=nix" "compress=zstd"  "noatime" ];
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/74F6-5772";
       fsType = "vfat";
-#       options = [ "fmask=0077" "dmask=0077" ];
+      options = [ "fmask=0022" "dmask=0022" ];
     };
-
-  fileSystems."/mnt" = {
-    device = ".host:";
-    fsType = "fuse./run/current-system/sw/bin/vmhgfs-fuse";
-    options = [
-      "allow_other"
-      "umask=027"  # 等价于权限750（umask=027 → 777-027=750）
-      "uid=1000"    # 指定属主UID（替换为你的用户UID，可用id -u查看）
-      "gid=100"     # 指定属组GID（替换为你的组GID，可用id -g查看）
-    ];
-  };
 
   swapDevices = [ ];
+
+
+  # 挂载 NTFS 分区
+  fileSystems."/mnt/lazycat/winE" = {
+    device = "UUID=5CBCB723BCB6F71C";  # 替换为你的 UUID
+    fsType = "ntfs3";
+    options = [ "defaults" "uid=1000" "gid=1000" "dmask=027" "fmask=137" ];
+  };
+
+ fileSystems."/mnt/lazycat/winF" = {
+    device = "UUID=3C8CC3008CC2B3A4";  # 替换为你的 UUID
+    fsType = "ntfs3";
+    options = [ "defaults" "uid=1000" "gid=1000" "dmask=027" "fmask=137" ];
+  };
+
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.ens33.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp4s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

@@ -48,7 +48,8 @@
       {
         "type": "packages",
         "key": "{#90}│ {#93}󰏖 Pkgs      {#90}│",
-        "format": "{$1}{?pacman}{pacman} (pacman) [{pacman-branch}]  {?nix-system}{nix-system} (nix)  {?nix-user}{nix-user} (nix-user)"
+        // "format": "{$1}{?pacman}{pacman} (pacman) [{pacman-branch}]  {?nix-system}{nix-system} (nix)  {?nix-user}{nix-user} (nix-user)"
+        "format": "{$1}{?nix-system}{nix-system} (nix-system){/nix-system} {?nix-user}{nix-user} (nix-user){/nix-user}"
       },
       {
         "type": "display",

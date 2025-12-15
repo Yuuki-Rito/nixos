@@ -1,0 +1,1 @@
+chmod +x ~/.config/niri/scripts/swayidle.sh
