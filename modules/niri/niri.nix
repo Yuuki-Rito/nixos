@@ -12,6 +12,8 @@
     fsearch
     swayidle
     numlockx
+    udiskie
+    vicinae
     xwayland-satellite
   ];
 }

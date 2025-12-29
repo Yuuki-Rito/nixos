@@ -42,6 +42,9 @@
     vscode
     wpsoffice
     zip
+
+    kdePackages.bluedevil
+    kdePackages.sddm-kcm
  ];
 
   nixpkgs.config.permittedInsecurePackages = [

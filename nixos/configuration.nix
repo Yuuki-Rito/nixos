@@ -21,6 +21,7 @@
 #     grub.efiSupport = true;
 #     grub.useOSProber = true;
 #     grub.fsIdentifier = "UUID";
+#     grub.removable = true;
 #     grub.device = "nodev";
 #     efi.canTouchEfiVariables = false;
 #     efi.efiSysMountPoint = "/boot/efi";
@@ -68,6 +69,14 @@
   services.displayManager.sddm.autoNumlock = true;
   services.desktopManager.plasma6.enable = true;
 
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    plasma-browser-integration # 浏览器集成
+    oxygen-icons               # 较老的 Oxygen 图标/主题
+    elisa                      # 音乐播放器
+    okular
+  ];
+
+
     # 必要的环境变量
   environment.sessionVariables = {
     # GTK_IM_MODULE = "fcitx";
@@ -84,7 +93,7 @@
   };
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+#   services.printing.enable = true;
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
@@ -129,7 +138,7 @@
   nix.settings = {
     substituters = [
       "https://mirrors.ustc.edu.cn/nix-channels/store?priority=10"
-      "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store?priority=5"
+      # "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store?priority=5"
       "https://cache.nixos.org/"
     ];
       

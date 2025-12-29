@@ -8,9 +8,9 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "uas" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "usb_storage" "usbhid" "uas" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" "ntfs3" ];
+  boot.kernelModules = [ "kvm-amd" "ntfs3" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
@@ -39,30 +39,15 @@
 
   swapDevices = [ ];
 
-
-  # 挂载 NTFS 分区
-  fileSystems."/mnt/lazycat/winE" = {
-    device = "UUID=5CBCB723BCB6F71C";
-    fsType = "ntfs3";
-    options = [ "defaults" "uid=1000" "gid=1000" "dmask=027" "fmask=137" ];
-  };
-
- fileSystems."/mnt/lazycat/winF" = {
-    device = "UUID=3C8CC3008CC2B3A4";
-    fsType = "ntfs3";
-    options = [ "defaults" "uid=1000" "gid=1000" "dmask=027" "fmask=137" ];
-  };
-
-
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp4s0.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
+  # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp4s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.bluetooth.enable = true;
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

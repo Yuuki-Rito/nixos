@@ -1,21 +1,7 @@
 { config, pkgs, ... }:
 
 {
-# Install firefox.
-  programs.fish.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    fastfetch
-    fnm
-    git
-    nix-output-monitor
-    fishPlugins.sdkman-for-fish
-    micro
-    wget
-    zoxide
- ];
-
-  
+ 
   programs.starship = {
     enable = true;
      interactiveOnly = true;
