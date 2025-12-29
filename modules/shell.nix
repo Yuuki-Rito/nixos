@@ -5,13 +5,16 @@
   programs.fish.enable = true;
 
   environment.systemPackages = with pkgs; [
+    btop
     fastfetch
     fnm
     git
     nix-output-monitor
     fishPlugins.sdkman-for-fish
     micro
+    xclip
     wget
+    wl-clipboard
     zoxide
  ];
 

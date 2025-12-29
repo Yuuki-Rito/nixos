@@ -33,6 +33,7 @@
     google-chrome
     # mariadb
     mcomix
+    mpv
     qbittorrent-enhanced
     smplayer
     steam

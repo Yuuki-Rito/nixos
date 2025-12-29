@@ -1,5 +1,4 @@
-{
-  imports = [
-    ./wpsoffice
-  ];
-}
+[
+  (import ./smplayer)
+  # (import ./wpsoffice)
+]
