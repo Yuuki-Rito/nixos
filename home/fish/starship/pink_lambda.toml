@@ -1,0 +1,28 @@
+# 禁止在命令之间自动换行
+add_newline = true
+
+# 自定义格式：第一行增加边框和颜色区分，第二行 Lambda 符号
+format = """
+[╭─](#ff87af)$username[@](white)$hostname [in](white) [$directory](white)
+[╰─](#ff87af)[λ](#ff87af) """
+
+[username]
+show_always = true
+style_user = "#ff87af" # 这里使用了粉红色十六进制
+format = "[$user]($style)"
+
+[hostname]
+ssh_only = false
+style = "#ff87af"
+format = "[$hostname]($style)"
+
+[directory]
+truncation_length = 3
+truncation_symbol = "…/"
+style = "white"
+format = "[$path]($style)"
+
+[character]
+# 保持为空，因为我们在上面的 format 里已经手动定义了 λ
+success_symbol = ""
+error_symbol = "[x](bold red)"

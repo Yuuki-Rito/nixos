@@ -38,7 +38,7 @@
     smplayer
     steam
     sublime4
-#     typora
+    # typora
     unzip
     vscode
     wpsoffice

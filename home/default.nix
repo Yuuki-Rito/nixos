@@ -1,13 +1,13 @@
 {
   home.file = {
-  # ".config/niri".source = ./niri; 
   # ".config/noctalia".source = ./noctalia; 
     ".config/fastfetch".source = ./fastfetch;
   };
 
 
   imports = [
-    # ./niri
+    ./fish
+    ./niri
     ./sublime-text
   ];
 }

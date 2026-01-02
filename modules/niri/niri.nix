@@ -8,7 +8,7 @@
  
   environment.systemPackages = with pkgs; [
     capitaine-cursors
-    fuzzel
+    # fuzzel
     fsearch
     swayidle
     numlockx
