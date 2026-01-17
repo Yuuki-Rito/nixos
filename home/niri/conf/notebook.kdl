@@ -1,0 +1,97 @@
+input {
+    
+    // Next sections include libinput settings.
+    // Omitting settings disables them, or leaves them at their default values.
+    // All commented-out settings here are examples, not defaults.
+    touchpad {
+        // off
+        tap
+        // dwt
+        // dwtp
+        // drag false
+        // drag-lock
+        natural-scroll
+        // accel-speed 0.2
+        // accel-profile "flat"
+        scroll-method "two-finger"
+        // disabled-on-external-mouse
+    }
+}
+
+// 覆盖由niri启动的进程的环境变量
+environment {
+    GDK_DPI_SCALE "0.8" 
+    // GDK_SCALE=1(只接受整数)
+    // ELECTRON_ZOOM_FACTOR "0.5"
+}
+
+//窗口默认宽度
+window-rule {
+    match app-id="org.kde.dolphin"
+    default-column-width { proportion 0.66667; }
+    //draw-border-with-background false
+}
+
+
+//窗口最大化
+window-rule {
+    match app-id="(jetbrains-idea|Code|Typora)"
+    //open-maximized true
+    open-maximized-to-edges true
+}
+
+window-rule {
+    match app-id="google-chrome"
+    focus-ring {   
+       // off
+      
+    }
+     draw-border-with-background false
+}
+
+/-window-rule {
+    match app-id="moekoemusic"
+    baba-is-float true
+    // default-column-width { proportion 0.5; }
+    
+    // 彻底解除 Electron 剩下的尺寸限制
+    min-width 100
+}
+
+window-rule {
+    // This regular expression is intentionally made as specific as possible,
+    // since this is the default config, and we want no false positives.
+    // You can get away with just app-id="wezterm" if you want.
+    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    default-column-width {}
+}
+
+// Example: block out two password managers from screen capture.
+// (This example rule is commented out with a "/-" in front.)
+/-window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+
+    block-out-from "screen-capture"
+
+    // Use this instead if you want them visible on third-party screenshot tools.
+    // block-out-from "screencast"
+}
+
+// `niri msg layers`显示有namespace可以在这里配置waybar透明度
+/-layer-rule {
+
+  match namespace="^noctalia-wappllpaper"
+  place-within-backdrop true
+}
+
+
+binds {
+    // moekoemusic
+    Mod+M hotkey-overlay-title="Run an Application: moekoemusic" { spawn "moekoemusic" "--force-device-scale-factor=1"; }
+
+    // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
+    // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
+    // For example, this is a standard bind to toggle the screen reader (orca).
+    // Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
+}

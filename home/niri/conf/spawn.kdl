@@ -1,0 +1,22 @@
+// kde鉴权
+spawn-sh-at-startup "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=KDE"
+spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1 &"
+
+// 启动niri时自动启动的软件
+spawn-at-startup "vicinae" "server"
+spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-at-startup "hypridle"
+
+// 启动 udiskie 自动挂载服务
+// 参数说明:
+// -a 自动挂载
+// -n 启用通知 (需要 dunst)
+// -t 启用系统托盘图标 (如果有托盘应用)
+// 重点: 必须使用 & 符号让它在后台持续运行1
+spawn-sh-at-startup  "udiskie -a -n -t &"
+
+
+
+// To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
+// spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
+

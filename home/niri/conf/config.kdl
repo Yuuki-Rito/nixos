@@ -1,0 +1,187 @@
+
+// 键盘鼠标触摸板等输入设备相关配置
+input {
+    keyboard {
+        xkb {
+          layout "us"
+        }
+        numlock
+    }
+
+    mouse {
+        // 设置鼠标移动速度,-1到1之间由慢到快
+        accel-speed 1
+    }
+
+    trackpoint {
+
+    }
+
+    // niri默认接管电源按钮的功能是sleep,这里禁用以使用关机功能
+    disable-power-key-handling
+    // 切换mod键：正常使用 Super，嵌套窗口内使用 Alt。
+    // mod-key "Super"
+    // mod-key-nested "Alt"
+
+}
+
+
+/-output "eDP-1" {
+
+    // 默认聚焦在这个显示器
+    focus-at-startup
+
+    // 格式为"<width>x<height>" 或者 "<width>x<height>@<refresh rate>".
+    // 如果省略了刷新率，niri将为分辨率选择最高的刷新率。
+    mode "2560x1600@165"
+
+    // 您可以使用整数或分数量表，例如，比例为150％。
+    scale 1.5
+
+    // transform允许逆时针旋转显示，有效值为:
+    // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
+    transform "normal"
+
+    // 输出在所有显示器坐标空间中的位置。未明确配置位置的显示器将放置在所有已放置的显示器右侧。
+     position x=1280 y=0
+}
+
+
+
+// 影响窗口的位置和尺寸的设置。
+layout {
+    // 在逻辑像素中设置Windows周围的缝隙。
+    gaps 16
+
+    // 存在多个窗口时，未最大化的窗口不自动居中，方便分屏
+    center-focused-column "never"
+
+    background-color "transparent"
+
+    // mod+r在预设之间切换的宽度。
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+        // 固定设置逻辑像素的宽度精确设置。（受scale影响）
+        // fixed 1920
+    }
+
+    // You can also customize the heights that "switch-preset-window-height" (Mod+Shift+R) toggles between.
+    // preset-window-heights { }
+
+    // You can change the default width of the new windows.
+    default-column-width { proportion 0.5; }
+
+    focus-ring {
+        // Uncomment this line to disable the focus ring.
+        // off
+
+        width 3
+
+        //active-color "#7fc8ff"
+
+        inactive-color "#505050"
+
+        active-gradient from="#80c8ff" to="#c7ff7f" angle=45 relative-to="workspace-view"
+
+        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+    }
+
+    // You can also add a border. It's similar to the focus ring, but always visible.
+    border {
+
+         off
+    }
+    struts {
+        left -10
+        right -10
+        top -10
+        bottom 0
+    }
+
+}
+
+// 覆盖由niri启动的进程的环境变量
+environment {
+   // QT_QPA_PLATFORM "x11"
+
+   // 优先使用 wayland， fallback 到 x11（兼容老应用）
+   GDK_BACKEND "wayland,x11"
+   GTK_IM_MODULE "wayland,fcitx"
+   QS_ICON_THEME "breeze-dark"
+} 
+
+hotkey-overlay {
+    // 跳过“重要的热键”弹出窗口。
+    skip-at-startup
+}
+
+// 设置截图保存的路径，null将会禁止保存到磁盘
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+// 忽略软件自带的装饰(例如标题栏)
+prefer-no-csd 
+
+
+// 指定光标的主题和大小，打字时隐藏光标
+cursor {
+    xcursor-theme "capitaine-cursors"
+    xcursor-size 36
+    hide-when-typing
+}
+
+// Animation settings.
+// The wiki explains how to configure individual animations:
+// https://yalter.github.io/niri/Configuration:-Animations
+animations {
+    // Uncomment to turn off all animations.
+    // off
+
+    // Slow down all animations by this factor. Values below 1 speed them up instead.
+    // slowdown 3.0
+}
+
+// 使用`niri msg windows`查看Title和App ID等信息
+window-rule {
+    geometry-corner-radius 12
+    clip-to-geometry true
+}
+
+
+
+//浮动窗口
+window-rule {
+    match  title="^画中画$"
+    open-floating true
+}
+
+layer-rule {
+  match namespace="^noctalia-wallpaper*"
+  place-within-backdrop true
+}
+overview {
+  workspace-shadow {
+    off
+  }
+}
+
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
+}
+
+// Disable the hot corners.
+gestures {
+    hot-corners {
+        off
+    }
+}
+
+include "./spawn.kdl"    
+
+include "./hotkeys.kdl"     
+
+// include "./notebook.kdl"     
+
+// include "./noctalia-pink.kdl" //# THEME_TOGGLE    

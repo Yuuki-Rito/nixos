@@ -18,20 +18,21 @@
 
   # 中文字体优化
   fonts = {
-  packages = with pkgs; [
-    cascadia-code
-    fira-code
-    noto-fonts
-    noto-fonts-cjk-sans    # 思源黑体 (无衬线)
-    noto-fonts-cjk-serif   # 思源宋体 (衬线)
-    noto-fonts-emoji-blob-bin
+    packages = with pkgs; [
+      cascadia-code
+      fira-code
+      noto-fonts
+      # noto-fonts-cjk-sans    # 思源黑体 (无衬线)
+      # noto-fonts-cjk-serif   # 思源宋体 (衬线)
+      noto-fonts-emoji-blob-bin
+      wqy_microhei
     ];
-  # fontconfig = {
-  #   defaultFonts = {
-  #     sansSerif = [ "Noto Sans CJK SC" ];
-  #     serif = [ "Noto Serif CJK SC" ];
-  #     monospace = [ "Noto Sans Mono CJK SC" ];
-  #    };
-  #  };
+    # fontconfig = {
+    #   defaultFonts = {
+    #     sansSerif = [ "Noto Sans CJK SC" ];
+    #     serif = [ "Noto Serif CJK SC" ];
+    #     monospace = [ "Noto Sans Mono CJK SC" ];
+    #    };
+    #  };
  };
 }
